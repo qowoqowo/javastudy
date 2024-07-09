@@ -1,6 +1,8 @@
 package ch09_class.student;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 // main 메소드 보유하고 있는 클래스
 public class StudentMain {
@@ -216,6 +218,92 @@ public class StudentMain {
 			System.out.println(stu);
 		}
 		
+		System.out.println("\n====================================\n");
+		
+		// 경험치 획득량으로 정렬
+		for(int k = 0; k < stuList.size() - 1; k++) {
+			for(int i = 0; i < stuList.size() - 1 - k; i++) {
+				// i = 0, 1, 2, 3, 4, 5
+				// stuList.get(i) -> Student -> 총 경험치 획득량
+				// stuList.get(i+1) -> Student -> 총 경험치 획득량
+				int leftExp = stuList.get(i).level * 100 + stuList.get(i).exp;
+				int rightExp = stuList.get(i+1).level * 100 + stuList.get(i+1).exp;
+				
+				if(leftExp < rightExp) {
+					Student temp = stuList.get(i);  // Integer
+					stuList.set(i, stuList.get(i+1));
+					stuList.set(i+1, temp);  
+				}
+			}
+		}
+		
+		for( Student stu : stuList) {
+			System.out.println(stu);
+		}
+		
+		System.out.println("\n====================================\n");
+		
+		// 113일 지남
+		for(int k = 0; k < 113; k++) {
+			for(int i = 0; i < stuList.size(); i++) {
+				stuList.get(i).afterOneDay();
+			}
+		}
+		
+		
+		// Collections.sort() 사용
+		// if(stuList.get(i) < stuList.get(i+1)) 와 같이
+		// 내부 값에 대해 비교하는 부분이 존재함
+		// 비교하는 기준을 알려주지 않으면 정렬을 못함
+		
+		// 정렬 기준 알려주기
+		Collections.sort(stuList, new Comparator<Student>() {
+			@Override
+			public int compare(Student stuLeft, Student stuRight) {
+				// 정렬의 기준을 return 되는 정수가 양수인지 음수인지로 알려줌
+				// level을 기준으로 정렬
+				// stuLeft.level - stuRight.level
+				// 왼쪽 level 이 더 높으면 양수, 왼쪽 level 이 더 작으면 음수
+				// stuLeft.level - stuRight.level 오름차순
+				// stuRight.level - stuLeft.level 내림차순
+				return stuLeft.level - stuRight.level;
+			}
+		});
+		
+		for( Student stu : stuList) {
+			System.out.println(stu);
+		}
+		
+		
+		
+		Collections.sort(stuList, new Comparator<Student>() {
+			@Override
+			public int compare(Student stuLeft, Student stuRight) {
+				// 왼쪽 Student 의 총 경험치 계산
+				int leftExp = stuLeft.level * 100 + stuLeft.exp;
+				
+				// 오른쪽 Student 의 총 경험치 계산
+				int rightExp = stuRight.level * 100 + stuRight.exp;
+				
+				return leftExp - rightExp;
+			}
+		});
+		
+		for( Student stu : stuList) {
+			System.out.println(stu);
+		}
+		
+		
+		// 람다식 사용
+		Collections.sort(stuList, (stuLeft, stuRight) -> stuLeft.level - stuRight.level);
+		
+		Collections.sort(stuList, (stuLeft, stuRight)-> {
+			int leftExp = stuLeft.level * 100 + stuLeft.exp;
+			
+			int rightExp = stuRight.level * 100 + stuRight.exp;
+			
+			return leftExp - rightExp;
+		} );
 		
 		
 		
@@ -237,5 +325,11 @@ public class StudentMain {
 		
 		
 	}
-
+	
+	
+	
+	
+	
+	
+	
 }

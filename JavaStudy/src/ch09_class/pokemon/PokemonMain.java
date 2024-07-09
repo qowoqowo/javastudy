@@ -2,6 +2,8 @@ package ch09_class.pokemon;
 
 import java.util.ArrayList;
 
+import ch09_class.school.Student;
+
 public class PokemonMain {
 
 	public static void main(String[] args) {
@@ -126,7 +128,10 @@ public class PokemonMain {
 		
 		
 		
-		
+		Student hobbang = new Student("호빵맨",90,90,90,90);
+		// 필드변수 kor의 접근제어자에 default 이므로
+		// 다른폴더인 PokemonMKain에서 해당 필드변수에 접근할수 없음
+//		System.out.println(hobbang.name);
 		
 		
 		
