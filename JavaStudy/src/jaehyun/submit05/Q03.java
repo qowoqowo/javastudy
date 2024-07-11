@@ -10,7 +10,7 @@ public class Q03 {
 //		(int)(Math.random() * 4) + 0;
 		
 		// 1~50 사이의 랜덤 정수 (a=1, b=50)
-//		(int)(Math.random() * 50) + 1;
+//		(int)(Math.random() * 51) + 1;
 		
 		// 10~20 사이의 랜덤 정수 (a=10, b=20)
 //		(int)(Math.random() * 11) + 10;
